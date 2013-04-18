@@ -15,7 +15,7 @@ def hello():
 	r = twiml.Response()
 	r.say("Welcome to object phone!. ") 
 	with r.gather(numDigits=1, action="initial-handler", method="POST") as g:
-		g.say("Press one on your touchtone phone to search the Cooper-Hewitt collection by object ID. Press 2 to just listen to a random object.")
+		g.say("Press one on your touchtone phone to search the Cooper-Hewitt collection by object ID.zz Press 2 to just listen to a random object.")
 	return str(r)
 	
 @app.route('/initial-handler', methods=['GET','POST'])
@@ -59,7 +59,7 @@ def obj():
 		
 	if (medium):
 		phrase = phrase + "My medium is " + medium + ". "
-	
+			
 	r.say(phrase)
 	return str(r)
 
@@ -87,7 +87,7 @@ def random():
 		
 	if (medium):
 		phrase =  phrase + "My medium is " + medium + ". "
-	
+			
 	
 	r = twiml.Response()
 	r.say(phrase)
@@ -121,7 +121,32 @@ def object():
 	if (medium):
 		medium_phrase = "My medium is " + medium + ". "
 	
+	url = encode(int(obj_id))
+	url = "To read more about me, click http://cprhw.tt/o/" + str(url)
+	
 	r.sms(phrase)
 	r.sms(medium_phrase)
+	r.sms(url)
 	
 	return str(r)
+	
+def encode(num):
+	alphabet = '123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ'
+	base_count = len(alphabet)
+	encode = ''
+	
+	if (num < 0):
+		return ''
+	
+	while (num >= base_count):	
+		mod = num % base_count
+		encode = alphabet[mod] + encode
+		num = num / base_count
+
+	if (num):
+		encode = alphabet[num] + encode
+
+	return encode
+	
+	
+	
