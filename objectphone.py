@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-  r = twiml.Response()
+	r = twiml.Response()
 	r.say("Welcome to object phone!. ") 
 	with r.gather(numDigits=1, action="initial-handler", method="POST") as g:
 		g.say("Press one on your touchtone phone to search the Cooper-Hewitt collection by object ID. Press 2 to just listen to a random object.")
@@ -52,13 +52,13 @@ def obj():
 	medium = object_id.get('medium', [])
 	title = object_id.get('title', [])
 	
-	phrase = "Thanks for dialing an object. "
+	phrase = "Hi you've reached  "
 
 	if (title):
-		phrase = phrase + "Your object is called " + title + ". "
+		phrase = phrase + title + ". "
 		
 	if (medium):
-		phrase = phrase + "It's medium is " + medium + ". "
+		phrase = phrase + "My medium is " + medium + ". "
 	
 	r.say(phrase)
 	return str(r)
@@ -83,10 +83,10 @@ def random():
 	
 	phrase = "Thanks, we are looking up a random object just for you. "
 	if (title):
-		phrase = phrase + "Your random object is called " + title + ". "
+		phrase = phrase + "Hi, you've reached " + title + ". "
 		
 	if (medium):
-		phrase =  phrase + "It's medium is " + medium + ". "
+		phrase =  phrase + "My medium is " + medium + ". "
 	
 	
 	r = twiml.Response()
@@ -116,10 +116,10 @@ def object():
 	phrase = "Thanks for texting me. "
 
 	if (title):
-		phrase = phrase + "Your object is called " + title + ". "
+		phrase = phrase + "I'm called " + title + ". "
 		
 	if (medium):
-		medium_phrase = "It's medium is " + medium + ". "
+		medium_phrase = "My medium is " + medium + ". "
 	
 	r.sms(phrase)
 	r.sms(medium_phrase)
