@@ -1,3 +1,6 @@
+# objectphone.py: originally written by Micah Walter:
+# https://gist.github.com/micahwalter/5407518
+
 import os
 from flask import Flask, request, redirect
 from twilio import twiml
